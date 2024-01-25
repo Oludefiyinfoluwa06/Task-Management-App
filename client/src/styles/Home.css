@@ -1,0 +1,25 @@
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 20px;
+}
+
+.hero .hero-text h1 {
+    margin-bottom: 20px;
+}
+
+.hero img {
+    width: 600px;
+}
+
+@media screen and (max-width: 1000px) {
+    .hero {
+        justify-content: center;
+        flex-wrap: wrap-reverse;
+    }
+    .hero .hero-text {
+        text-align: center;
+    }
+}

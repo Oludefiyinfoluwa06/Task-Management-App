@@ -1,0 +1,53 @@
+.login {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.login form {
+    padding: 20px 30px;
+    box-shadow: 0 0 10px #ccc;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.login form .input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    border: 1px solid #000;
+    padding: 7px;
+    margin: 15px 0;
+    border-radius: 7px;
+}
+
+form .input input {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+form button {
+    padding: 10px 15px;
+    border: none;
+    outline: none;
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login img {
+    width: 600px;
+}
+
+@media screen and (max-width: 1000px) {
+    .login {
+        justify-content: center;
+        flex-wrap: wrap-reverse;
+    }
+}

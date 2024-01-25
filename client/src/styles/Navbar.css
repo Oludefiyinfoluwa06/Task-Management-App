@@ -1,0 +1,28 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 20px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+nav ul li {
+    cursor: pointer;
+}
+
+nav ul li a {
+    color: #000;
+    transition: 1s;
+}
+
+nav ul li a:hover {
+    color: blue;
+}

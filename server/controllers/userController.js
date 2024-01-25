@@ -60,7 +60,7 @@ const login = async (req, res) => {
         return res.status(400).json({ 'error': 'Password is incorrect' });
     }
 
-    return res.status(200).json({ 'message': 'Login successful', 'id': user.id, 'email': user.email, 'token': generateToken(user._id) });
+    return res.status(200).json({ 'message': 'Login successful', 'id': user.id, 'email': user.email, 'username': user.username, 'token': generateToken(user._id) });
 
 }
 
