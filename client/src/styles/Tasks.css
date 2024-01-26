@@ -1,0 +1,18 @@
+.tasks {
+    padding: 20px;
+}
+
+.tasks .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.header a {
+    padding: 10px 15px;
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+}

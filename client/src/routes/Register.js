@@ -41,7 +41,7 @@ const Register = () => {
 
     return (
         <div className="register">
-            <form>
+            <form onSubmit={handleRegister}>
                 <h1>Register Here</h1>
                 <p style={{ color: '#ff0000' }}>{error}</p>
                 <div className="input">
@@ -56,7 +56,7 @@ const Register = () => {
                     <FaLock />
                     <input type="password" placeholder='Create a password' value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
-                <button onClick={handleRegister}>Register</button>
+                <button>Register</button>
                 <p style={{ marginTop: '7px' }}>Already have an account? <Link to='/login'>Login</Link></p>
             </form>
             <img src={heroImg} alt="Login desc" />

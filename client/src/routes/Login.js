@@ -42,7 +42,7 @@ const Login = () => {
 
     return (
         <div className="login">
-            <form>
+            <form onSubmit={handleLogin}>
                 <h1>Login Here</h1>
                 <p style={{ color: '#ff0000' }}>{error}</p>
                 <div className="input">
@@ -53,7 +53,7 @@ const Login = () => {
                     <FaLock />
                     <input type="password" placeholder='Enter your password' value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
-                <button onClick={handleLogin}>Login</button>
+                <button>Login</button>
                 <p style={{ marginTop: '7px' }}>Don't have an account? <Link to='/register'>Register</Link></p>
             </form>
             <img src={heroImg} alt="Login desc" />
