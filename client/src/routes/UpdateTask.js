@@ -1,31 +1,58 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const AddTask = () => {
+const UpdateTask = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [dueDate, setdueDate] = useState('');
     const [priorityLevel, setPriorityLevel] = useState('');
     const [error, setError] = useState('');
-
+    
+    const { id } = useParams();
     const navigate = useNavigate();
     let token;
-
+    
     const user = JSON.parse(localStorage.getItem('user'));
-
+    
     if (!user) {
         navigate('/login');
-        return;
     }
-
+    
     token = user.token;
 
-    const handleAddTask = async (e) => {
-        e.preventDefault();
+    useEffect(() => {
+        axios.get(`https://task-management-server-rho-ten.vercel.app/api/tasks/${id}`, {
+            headers: {
+                Authorization: token,
+            }
+        })
+            .then(res => {
+                const convertDateFormat = (inputDate) => {
+                    const dateObject = new Date(inputDate);
+                    
+                    const year = dateObject.getFullYear();
+                    const month = String(dateObject.getMonth() + 1).padStart(2, '0');
+                    const day = String(dateObject.getDate()).padStart(2, '0');
+    
+                    return `${year}-${month}-${day}`;
+                };
+                if (res) {
+                    setName(res.data.task.name);
+                    setDescription(res.data.task.description);
+                    setdueDate(convertDateFormat(res.data.task.dueDate));
+                    setPriorityLevel(res.data.task.priorityLevel);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, [id, token]);
 
+    const handleUpdateTask = async (e, id) => {
+        e.preventDefault();
         try {
-            const res = await axios.post('https://task-management-server-rho-ten.vercel.app/api/tasks/add',
+            const res = await axios.put(`https://task-management-server-rho-ten.vercel.app/api/tasks/update/${id}`,
                 { name, description, dueDate, priorityLevel },
                 {
                     headers: {
@@ -34,7 +61,7 @@ const AddTask = () => {
                 }
             );
 
-            if (res.data.message) {
+            if (res) {
                 setError('');
                 navigate('/tasks');
             }
@@ -43,16 +70,14 @@ const AddTask = () => {
             if (err.response) {
                 setError(err.response.data.error);
             } else {
-                setError('An error occurred while adding the task.');
+                setError('An error occurred while updating the task.');
             }
         }
     };
 
-
-
     return (
-        <form onSubmit={handleAddTask} className='add-task'>
-            <h1>Add Task</h1>
+        <form onSubmit={e => handleUpdateTask(e, id)} className='update-task'>
+            <h1>Update Task</h1>
             <p style={{ color: '#ff0000' }}>{error}</p>
             <div className="input">
                 <label>Title</label>
@@ -71,9 +96,9 @@ const AddTask = () => {
                 <input type="text" placeholder='Specify a priority level for this task' value={priorityLevel} onChange={e => setPriorityLevel(e.target.value)} />
                 <small>Your value must be either of low, medium or high</small>
             </div>
-            <button>Add Task</button>
+            <button>Update Task</button>
         </form>
     );
 }
 
-export default AddTask;
+export default UpdateTask;
