@@ -26,10 +26,6 @@ const taskSchema = new Schema({
         type: String,
         required: true,
     },
-    progress: {
-        type: String,
-        required: true,
-    }
 }, { timestamps: true });
 
 const Task = mongoose.model('Task', taskSchema);

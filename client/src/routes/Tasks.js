@@ -4,6 +4,7 @@ import axios from 'axios';
 import NoTask from '../components/NoTask';
 import '../styles/Tasks.css';
 import Loading from '../components/Loading';
+import AllTasks from '../components/AllTasks';
 
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
@@ -51,11 +52,7 @@ const Tasks = () => {
             {isLoading ? (
                 <Loading />
             ) : tasks.length > 0 ? (
-                tasks.map(task => (
-                    <div key={task.id}>
-                        {task.name}
-                    </div>
-                ))
+                <AllTasks tasks={tasks} />
             ) : (
                 <NoTask />
             )}

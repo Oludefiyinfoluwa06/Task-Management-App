@@ -27,3 +27,29 @@
 .no-task img {
     width: 300px;
 }
+
+.add-task {
+    max-width: 500px;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 30px auto;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.add-task h1 {
+    margin-bottom: 10px;
+}
+
+.add-task .input {
+    margin-bottom: 10px;
+}
+
+.add-task .input label {
+    font-weight: bold;
+}
+
+.add-task .input input {
+    border: 1px solid #000;
+    padding: 7px;
+    border-radius: 7px;
+}
