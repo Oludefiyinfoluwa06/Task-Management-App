@@ -2,8 +2,5 @@ footer {
     padding: 20px;
     text-align: center;
     box-shadow: 0 0 10px #ccc;
-    position: absolute;
-    top: 100%;
-    left: 0;
     width: 100%;
 }
