@@ -21,18 +21,10 @@ const AddTask = () => {
         }
 
         token = user.token;
-        console.log(token)
     }, [navigate]);
 
     const handleAddTask = async (e) => {
         e.preventDefault();
-
-        const validPriorityLevels = ['low', 'medium', 'high'];
-        
-        if (!validPriorityLevels.includes(priorityLevel.toLowerCase())) {
-            setError('Priority level must be either low, medium, or high.');
-            return;
-        }
 
         try {
             const res = await axios.post(
