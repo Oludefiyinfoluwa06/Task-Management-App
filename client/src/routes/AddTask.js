@@ -12,16 +12,14 @@ const AddTask = () => {
     const navigate = useNavigate();
     let token;
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
 
-        if (!user) {
-            navigate('/login');
-            return;
-        }
+    if (!user) {
+        navigate('/login');
+        return;
+    }
 
-        token = user.token;
-    }, [navigate]);
+    token = user.token;
 
     const handleAddTask = async (e) => {
         e.preventDefault();
@@ -47,6 +45,7 @@ const AddTask = () => {
             }
         }
     };
+
 
 
     return (

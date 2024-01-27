@@ -19,7 +19,7 @@ const addTask = async (req, res) => {
 
     const validPriorityLevels = ['low', 'medium', 'high'];
 
-    if (priorityLevel.toLowerCase() !== validPriorityLevels[0] || priorityLevel.toLowerCase() !== validPriorityLevels[1] || priorityLevel.toLowerCase() !== validPriorityLevels[2]) {
+    if (!validPriorityLevels.includes(priorityLevel.toLowerCase())) {
         return res.status(400).json({ error: 'Priority level must be either low, medium, or high.' });
     }
 
