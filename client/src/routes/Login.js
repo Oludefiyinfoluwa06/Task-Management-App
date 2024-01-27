@@ -16,9 +16,12 @@ const Login = () => {
         const user = JSON.parse(localStorage.getItem('user'));
 
         if (user) {
+            const token = user.token;
+            if (!token) return;
             navigate('/tasks');
-            return;
         }
+
+        return;
 
     }, [navigate]);
 

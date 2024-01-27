@@ -16,3 +16,14 @@
     color: #fff;
     border-radius: 5px;
 }
+
+.no-task, .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.no-task img {
+    width: 300px;
+}

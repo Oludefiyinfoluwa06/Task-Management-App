@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import NoTask from '../components/NoTask';
 import '../styles/Tasks.css';
+import Loading from '../components/Loading';
 
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
-    const user = JSON.parse(localStorage.getItem('user'));
-    const token = user.token;
+    const [isLoading, setIsLoading] = useState(true);
+
+    const navigate = useNavigate();
+    let token;
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (!user) return navigate('/login');
+
+        token = user.token;
+
+        return;
+    }, [navigate]);
 
     useEffect(() => {
         const getTasks = async () => {
@@ -16,10 +31,14 @@ const Tasks = () => {
                     }
                 });
 
-                setTasks(res.data.tasks);
-                console.log(res);
+                const userTasks = res.data.tasks;
+                setTasks(userTasks);
+                setIsLoading(false);
+
             } catch (error) {
-                console.log(error);
+                if (error.response.data.error === 'User is not authorized and no token, try logging in') {
+                    navigate('/login');
+                }
             }
         }
 
@@ -28,14 +47,19 @@ const Tasks = () => {
     }, [token]);
     
     return (
-        <div className="all-tasks">
-            <h1>All tasks</h1>
-            {tasks.map(task => (
-                <div>
-                    {task}
-                </div>
-            ))}
-        </div>
+        <>
+            {isLoading ? (
+                <Loading />
+            ) : tasks.length > 0 ? (
+                tasks.map(task => (
+                    <div key={task.id}>
+                        {task.name}
+                    </div>
+                ))
+            ) : (
+                <NoTask />
+            )}
+        </>
     );
 }
 

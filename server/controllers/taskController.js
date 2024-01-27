@@ -11,13 +11,13 @@ const getTasks = async (req, res) => {
 }
 
 const addTask = async (req, res) => {
-    const { name, description, dueDate, priorityLevel } = req.body;
+    const { name, description, dueDate, priorityLevel, progress } = req.body;
 
-    if (!name || !description || !dueDate || !priorityLevel) {
+    if (!name || !description || !dueDate || !priorityLevel || !progress) {
         return res.status(400).json({ 'error': 'Input fields cannot be empty' });
     }
 
-    const task = await Task.create({ user: req.user.id, name, description, dueDate, priorityLevel });
+    const task = await Task.create({ user: req.user.id, name, description, dueDate, priorityLevel, progress });
 
     if (!task) {
         return res.status(500).json({ 'error': 'An error occurred, please try again later' });
@@ -29,13 +29,13 @@ const addTask = async (req, res) => {
 const updateTask = async (req, res) => {
     const id = req.params.id;
 
-    const { name, description, dueDate, priorityLevel } = req.body;
+    const { name, description, dueDate, priorityLevel, progress } = req.body;
 
-    if (!name || !description || !dueDate || !priorityLevel) {
+    if (!name || !description || !dueDate || !priorityLevel || !progress) {
         return res.status(400).json({ 'error': 'Input fields cannot be empty' });
     }
 
-    const task = await Task.findByIdAndUpdate(id, { name, description, dueDate, priorityLevel }, { new: true });
+    const task = await Task.findByIdAndUpdate(id, { name, description, dueDate, priorityLevel, progress }, { new: true });
 
     if (!task) {
         return res.status(404).json({ 'error': 'This task could not be found' });

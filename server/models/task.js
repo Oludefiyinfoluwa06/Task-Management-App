@@ -25,6 +25,10 @@ const taskSchema = new Schema({
     priorityLevel: {
         type: String,
         required: true,
+    },
+    progress: {
+        type: String,
+        required: true,
     }
 }, { timestamps: true });
 
