@@ -1,7 +1,7 @@
 const Task = require("../models/task")
 
 const getTasks = async (req, res) => {
-    const tasks = await Task.find({ user: req.user.id });
+    const tasks = await Task.find({ user: req.user.id }).sort({ updatedAt: -1 });
 
     if (!tasks) {
         return res.status(400).json({ 'error': 'You do not have any tasks' });
