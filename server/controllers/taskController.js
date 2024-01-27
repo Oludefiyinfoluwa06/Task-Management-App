@@ -10,6 +10,18 @@ const getTasks = async (req, res) => {
     return res.status(200).json({ 'tasks': tasks });
 }
 
+const getTaskDetails = async (req, res) => {
+    const id = req.params.id;
+
+    const task = await Task.findById(id);
+
+    if (!task) {
+        return res.status(404).json({ 'error': 'Task could not be found' });
+    }
+
+    return res.status(200).json({ 'task': task });
+}
+
 const addTask = async (req, res) => {
     const { name, description, dueDate, priorityLevel } = req.body;
 
@@ -64,6 +76,7 @@ const deleteTask = async (req, res) => {
 
 module.exports = {
     getTasks,
+    getTaskDetails,
     addTask,
     updateTask,
     deleteTask

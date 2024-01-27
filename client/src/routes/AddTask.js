@@ -36,7 +36,7 @@ const AddTask = () => {
             );
 
             setError('');
-            console.log(res);
+            navigate('/tasks');
         } catch (err) {
             if (err.response) {
                 setError(err.response.data.error);
