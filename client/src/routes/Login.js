@@ -21,8 +21,6 @@ const Login = () => {
             navigate('/tasks');
         }
 
-        return;
-
     }, [navigate]);
 
     const handleLogin = e => {

@@ -16,10 +16,7 @@ const Register = () => {
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
 
-        if (user) {
-            navigate('/tasks');
-            return;
-        }
+        if (user) navigate('/tasks');
 
     }, [navigate]);
 

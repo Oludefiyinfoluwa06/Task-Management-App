@@ -16,11 +16,10 @@ const Tasks = () => {
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
 
-        if (!user) return navigate('/login');
+        if (!user) navigate('/login');
 
         token = user.token;
 
-        return;
     }, [navigate]);
 
     useEffect(() => {
