@@ -13,13 +13,13 @@ const UpdateTask = () => {
     const navigate = useNavigate();
     let token;
     
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     
-        if (!user) navigate('/login');
-        
-        token = user.token;
-    }, [navigate]);
+    if (!user) {
+        navigate('/login');
+    }
+    
+    token = user.token;
 
     useEffect(() => {
         axios.get(`https://task-management-server-rho-ten.vercel.app/api/tasks/${id}`, {
