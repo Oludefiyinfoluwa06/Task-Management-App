@@ -11,16 +11,12 @@ const Tasks = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const navigate = useNavigate();
-    let token;
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
 
-        if (!user) navigate('/login');
+    if (!user) navigate('/login');
 
-        token = user.token;
-
-    }, [navigate]);
+    const token = user.token;
 
     useEffect(() => {
         const getTasks = async () => {
@@ -49,7 +45,7 @@ const Tasks = () => {
 
         getTasks();
 
-    }, [token]);
+    }, [token, navigate]);
     
     return (
         <>

@@ -18,6 +18,7 @@ import Tasks from './routes/Tasks';
 import Profile from './routes/Profile';
 import AddTask from './routes/AddTask';
 import UpdateTask from './routes/UpdateTask';
+import EditProfile from './routes/EditProfile';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/profile' element={<Profile />} />
+      <Route path='/profile/edit-profile/:id' element={<EditProfile />} />
       <Route path='/tasks' element={<TaskLayout />}>
         <Route index element={<Tasks />} />
         <Route path='add' element={<AddTask />} />

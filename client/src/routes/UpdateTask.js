@@ -11,7 +11,6 @@ const UpdateTask = () => {
     
     const { id } = useParams();
     const navigate = useNavigate();
-    let token;
     
     const user = JSON.parse(localStorage.getItem('user'));
     
@@ -19,7 +18,7 @@ const UpdateTask = () => {
         navigate('/login');
     }
     
-    token = user.token;
+    const token = user.token;
 
     useEffect(() => {
         axios.get(`https://task-management-server-rho-ten.vercel.app/api/tasks/${id}`, {
@@ -50,10 +49,10 @@ const UpdateTask = () => {
                     localStorage.clear();
                     navigate('/login');
                 } else {
-                    setError('An error occurred while adding the task.');
+                    setError('An error occurred while getting the task detail.');
                 }
             });
-    }, [id, token]);
+    }, [id, token, navigate]);
 
     const handleUpdateTask = async (e, id) => {
         e.preventDefault();

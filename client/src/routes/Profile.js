@@ -3,21 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../components/Loading';
 import User from '../components/User';
+import '../styles/Profile.css';
 
 const Profile = () => {
     const [profile, setProfile] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
-    let token;
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
 
-        if (!user) navigate('/login');
+    if (!user) navigate('/login');
 
-        token = user.token;
-
-    }, [navigate]);
+    const token = user.token;
 
     useEffect(() => {
         const userProfile = async () => {
@@ -45,14 +42,17 @@ const Profile = () => {
 
         userProfile();
 
-    }, [token]);
+    }, [token, navigate]);
 
     return (
         <>
             {isLoading ? (
                 <Loading />
             ) : (
-                <User profile={profile} />
+                <div className="user-profile">
+                    {/* <h1>User profile</h1> */}
+                    <User profile={profile} />
+                </div>
             )}
         </>
     );

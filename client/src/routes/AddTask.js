@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -10,13 +10,12 @@ const AddTask = () => {
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
-    let token;
 
     const user = JSON.parse(localStorage.getItem('user'));
 
     if (!user) navigate('/login');
 
-    token = user.token;
+    const token = user.token;
 
     const handleAddTask = async (e) => {
         e.preventDefault();
