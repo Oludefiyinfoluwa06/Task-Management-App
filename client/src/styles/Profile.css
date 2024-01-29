@@ -114,4 +114,7 @@ form button {
         align-items: center;
         justify-content: center;
     }
+    .profile .profile-info p {
+        font-size: 20px;
+    }
 }
