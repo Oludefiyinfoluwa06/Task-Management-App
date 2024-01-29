@@ -23,6 +23,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin: 30px;
 }
 
 .no-task img {

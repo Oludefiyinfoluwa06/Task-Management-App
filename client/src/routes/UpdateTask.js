@@ -15,9 +15,7 @@ const UpdateTask = () => {
     
     const user = JSON.parse(localStorage.getItem('user'));
     
-    if (!user) {
-        navigate('/login');
-    }
+    if (!user) return navigate('/login');
     
     token = user.token;
 
@@ -44,8 +42,14 @@ const UpdateTask = () => {
                     setPriorityLevel(res.data.task.priorityLevel);
                 }
             })
-            .catch(err => {
-                console.log(err);
+            .catch(error => {
+                if (error.response.data.error === "User is not authorized, try logging in again" || error.response.data.error === "User is not authorized and no token, try logging in") {
+                    localStorage.removeItem('user');
+                    localStorage.clear();
+                    navigate('/login');
+                } else {
+                    setError('An error occurred while adding the task.');
+                }
             });
     }, [id, token]);
 

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NoTask from '../components/NoTask';
-import '../styles/Tasks.css';
 import Loading from '../components/Loading';
 import AllTasks from '../components/AllTasks';
+import '../styles/Tasks.css';
 
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
@@ -37,8 +37,13 @@ const Tasks = () => {
                 setIsLoading(false);
 
             } catch (error) {
-                if (error.response.data.error === 'User is not authorized and no token, try logging in') {
+                if (error.response.data.error === "User is not authorized, try logging in again" || error.response.data.error === "User is not authorized and no token, try logging in") {
+                    localStorage.removeItem('user');
+                    localStorage.clear();
                     navigate('/login');
+                    window.location.reload();
+                } else {
+                    setIsLoading(true);
                 }
             }
         }

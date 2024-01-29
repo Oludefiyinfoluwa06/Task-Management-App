@@ -14,10 +14,7 @@ const AddTask = () => {
 
     const user = JSON.parse(localStorage.getItem('user'));
 
-    if (!user) {
-        navigate('/login');
-        return;
-    }
+    if (!user) return navigate('/login');
 
     token = user.token;
 
@@ -40,8 +37,10 @@ const AddTask = () => {
             }
 
         } catch (err) {
-            if (err.response) {
-                setError(err.response.data.error);
+            if (err.response.data.error === "User is not authorized, try logging in again" || err.response.data.error === "User is not authorized and no token, try logging in") {
+                localStorage.removeItem('user');
+                localStorage.clear();
+                navigate('/login');
             } else {
                 setError('An error occurred while adding the task.');
             }

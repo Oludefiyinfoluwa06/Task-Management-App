@@ -14,10 +14,13 @@ const Navbar = () => {
             setIsLoggedIn(true);
         }
 
+        window.location.reload();
+
     }, [navigate]);
 
     const handleLogout = () => {
         localStorage.removeItem('user');
+        localStorage.clear();
         setIsLoggedIn(false);
         navigate('/login');
         window.location.reload();
