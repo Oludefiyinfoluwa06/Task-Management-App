@@ -18,7 +18,7 @@
     border-radius: 5px;
 }
 
-.no-task, .loading {
+.no-task {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -157,5 +157,34 @@
 @media screen and (max-width: 800px) {
     .tasks .header{
         justify-content: center;
+    }
+}
+
+.loading {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.loading span {
+    position: absolute;
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    background-color: black;
+    transform: rotate(calc(var(--i) * (360deg / 10))) translate(35px);
+    opacity: 0;
+    animation: load 1s linear infinite;
+    animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes load {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
