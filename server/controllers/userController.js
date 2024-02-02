@@ -70,8 +70,40 @@ const userProfile = async (req, res) => {
     return res.status(200).json({ 'user': { id: _id, username, email } });
 }
 
+const updateProfile = async (req, res) => {
+    const id = req.params.id;
+
+    const { username, email } = req.body;
+
+    if (!username || !email) {
+        return res.status(400).json({ 'error': 'Input fields cannot be empty' });
+    }
+
+    const user = await User.findByIdAndUpdate(id, { username, email }, { new: true });
+
+    if (!user) {
+        return res.status(400).json({ 'error': 'An error occurred, try again later' });
+    }
+
+    return res.status(200).json({ 'message': 'Profile updated successfully' });
+}
+
+const deleteProfile = async (req, res) => {
+    const id = req.params.id;
+
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+        return res.status(400).json({ 'error': 'An error occurred, try again later' });
+    }
+
+    return res.status(200).json({ 'message': 'Profile deleted successfully' });
+}
+
 module.exports = {
     register,
     login,
-    userProfile
+    userProfile,
+    updateProfile,
+    deleteProfile,
 }

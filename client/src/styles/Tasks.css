@@ -44,6 +44,11 @@
 
 .add-task .input, .update-task .input {
     margin-bottom: 10px;
+    border: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 .add-task .input label, .update-task .input label {
@@ -119,9 +124,36 @@
 
 .task .task-footer {
     display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.task-footer .footer-top {
+    display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 15px;
+}
+
+.task-footer .footer-bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.footer-bottom .task-del, .footer-bottom .task-edit {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    border-radius: 8px;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
 }
 
 .hide {

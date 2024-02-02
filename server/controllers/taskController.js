@@ -56,7 +56,7 @@ const updateTask = async (req, res) => {
     const task = await Task.findByIdAndUpdate(id, { name, description, dueDate, priorityLevel }, { new: true });
 
     if (!task) {
-        return res.status(404).json({ 'error': 'This task could not be found' });
+        return res.status(400).json({ 'error': 'An error occurred, try again later' });
     }
 
     return res.status(200).json({ 'message': 'Task updated successfully' });
@@ -68,7 +68,7 @@ const deleteTask = async (req, res) => {
     const task = await Task.findByIdAndDelete(id);
 
     if (!task) {
-        return res.status(404).json({ 'error': 'This task could not be found' });
+        return res.status(400).json({ 'error': 'An error occurred, try again later' });
     }
 
     return res.status(200).json({ 'message': 'Task deleted successfully' });

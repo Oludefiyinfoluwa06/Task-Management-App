@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loading = () => {
     return (
-        <div class="loading">
+        <div className="loading">
             <span style={{ '--i':1 }}></span>
             <span style={{ '--i':2 }}></span>
             <span style={{ '--i':3 }}></span>

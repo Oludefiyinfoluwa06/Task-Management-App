@@ -1,11 +1,33 @@
 import React from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { FaPen } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import profilePic from '../assets/profile-pic.png';
 
 const User = ({ profile }) => {
-    const handleDeleteProfile = () => {
+    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user'));
 
+    if (!user) {
+        navigate('/login');
+        return;
+    }
+
+    const token = user.token;
+
+    const handleDeleteProfile = async userId => {
+        await axios.delete(`https://task-management-server-rho-ten.vercel.app/api/user/me/delete/${userId}`, {
+            headers: {
+                Authorization: token,
+            },
+        })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     return (
@@ -23,7 +45,7 @@ const User = ({ profile }) => {
                 </div>
                 <div className="profile-actions">
                     <Link to={`edit-profile/${profile.id}`} className="action">Edit profile</Link>
-                    <div className="action" onClick={handleDeleteProfile}>Delete profile</div>
+                    <div className="action" onClick={() => handleDeleteProfile(profile.id)}>Delete profile</div>
                 </div>
             </div>
         </div>

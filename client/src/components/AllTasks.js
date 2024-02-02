@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CiMenuKebab } from 'react-icons/ci';
 import { FaCalendar, FaPencilAlt, FaTrash } from 'react-icons/fa';
@@ -72,17 +72,19 @@ const AllTasks = ({ tasks }) => {
                     <p>{task.description}</p>
                     <hr />
                     <div className="task-footer">
-                        <FaCalendar />
-                        <p>Due on {formatDate(task.dueDate)}</p>
-                    </div>
-                    <div className={selectedTaskId === task._id ? "menu" : "hide"}>
-                        <div className="menu-item" onClick={() => handleUpdateTask(task._id)}>
-                            <FaPencilAlt />
-                            <p>Edit task</p>
+                        <div className="footer-top">
+                            <FaCalendar />
+                            <p>Due on {formatDate(task.dueDate)}</p>
                         </div>
-                        <div className="menu-item" onClick={() => handleDeleteTask(task._id)}>
-                            <FaTrash />
-                            <p>Delete Task</p>
+                        <div className="footer-bottom">
+                            <div className="task-edit" onClick={() => handleUpdateTask(task._id)}>
+                                <FaPencilAlt />
+                                Edit Task
+                            </div>
+                            <div className="task-del" onClick={() => handleDeleteTask(task._id)}>
+                                <FaTrash />
+                                Delete Task
+                            </div>
                         </div>
                     </div>
                 </div>
