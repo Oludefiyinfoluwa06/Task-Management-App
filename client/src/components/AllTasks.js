@@ -1,11 +1,9 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CiMenuKebab } from 'react-icons/ci';
 import { FaCalendar, FaPencilAlt, FaTrash } from 'react-icons/fa';
 
 const AllTasks = ({ tasks }) => {
-    const [selectedTaskId, setSelectedTaskId] = useState(null);
     const navigate = useNavigate();
 
     const user = JSON.parse(localStorage.getItem('user'));
@@ -26,10 +24,6 @@ const AllTasks = ({ tasks }) => {
 
         const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date(dueDate));
         return formattedDate;
-    }
-
-    const handleShowMenu = taskId => {
-        setSelectedTaskId(prevSelectedTaskId => prevSelectedTaskId === taskId ? null : taskId);
     }
 
     const handleUpdateTask = (taskId) => navigate(`update/${taskId}`);
@@ -65,9 +59,6 @@ const AllTasks = ({ tasks }) => {
                                 <span className='low'></span>
                             ) : <></>} {task.name}
                         </p>
-                        <div className="task-menu" onClick={() => handleShowMenu(task._id)}>
-                            <CiMenuKebab />
-                        </div>
                     </div>
                     <p>{task.description}</p>
                     <hr />

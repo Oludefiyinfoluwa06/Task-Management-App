@@ -23,7 +23,13 @@ const User = ({ profile }) => {
             },
         })
             .then(res => {
-                console.log(res);
+                if (res.data.message) {
+                    localStorage.removeItem('user');
+                    localStorage.clear();
+                    navigate('/');
+                    window.location.reload();
+                    return;
+                }
             })
             .catch(err => {
                 console.log(err);
