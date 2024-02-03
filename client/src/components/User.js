@@ -7,7 +7,7 @@ import profilePic from '../assets/profile-pic.png';
 
 const User = ({ profile }) => {
     const [toggleModal, setToggleModal] = useState(false);
-    const [userProfile, setUserProfile] = useState('');
+    const [userProfile, setUserProfile] = useState(null);
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -21,6 +21,7 @@ const User = ({ profile }) => {
     const handleDeleteProfile = async userId => {
         await axios.delete(`https://task-management-server-rho-ten.vercel.app/api/user/me/delete/${userId}`, {
             headers: {
+                'Content-Type': 'multipart/form-data',
                 Authorization: token,
             },
         })
@@ -49,7 +50,10 @@ const User = ({ profile }) => {
     const handleUploadPic = async e => {
         e.preventDefault();
 
-        const res = await axios.post('https://task-management-server-rho-ten.vercel.app/api/profile/upload', { userProfile },
+        const formData = new FormData();
+        formData.append('userProfile', userProfile);
+
+        const res = await axios.post('https://task-management-server-rho-ten.vercel.app/api/profile/upload', { formData },
             {
                 headers: {
                     Authorization: token
@@ -80,8 +84,8 @@ const User = ({ profile }) => {
                 <div className="closeModal" onClick={handleCloseModal}>
                     <FaTimes />
                 </div>
-                <form onSubmit={handleUploadPic}>
-                    <input type="file" name="userProfile" id="userProfile" value={userProfile} onChange={e => setUserProfile(e.target.value)} />
+                <form onSubmit={handleUploadPic} encType='multipart/form-data'>
+                    <input type="file" name="userProfile" id="userProfile" onChange={e => setUserProfile(e.target.files[0])} />
                     <button>Upload</button>
                 </form>
             </div>

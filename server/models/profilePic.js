@@ -8,7 +8,7 @@ const profilePicSchema = new Schema({
         required: true,
     },
     profilePic: {
-        type: String,
+        type: Buffer,
         requried: true,
     }
 });
