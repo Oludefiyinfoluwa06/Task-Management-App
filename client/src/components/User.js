@@ -52,14 +52,18 @@ const User = ({ profile }) => {
         const formData = new FormData();
         formData.append('userProfile', userProfile);
 
-        const res = await axios.post('https://task-management-server-rho-ten.vercel.app/api/profile/upload', { formData },
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: token
-                }
-            });
-        console.log(res);
+        try {
+            const res = await axios.post('https://task-management-server-rho-ten.vercel.app/api/profile/upload', formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        Authorization: token
+                    }
+                });
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
