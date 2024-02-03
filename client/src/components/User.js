@@ -21,7 +21,6 @@ const User = ({ profile }) => {
     const handleDeleteProfile = async userId => {
         await axios.delete(`https://task-management-server-rho-ten.vercel.app/api/user/me/delete/${userId}`, {
             headers: {
-                'Content-Type': 'multipart/form-data',
                 Authorization: token,
             },
         })
@@ -56,6 +55,7 @@ const User = ({ profile }) => {
         const res = await axios.post('https://task-management-server-rho-ten.vercel.app/api/profile/upload', { formData },
             {
                 headers: {
+                    'Content-Type': 'multipart/form-data',
                     Authorization: token
                 }
             });
