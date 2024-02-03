@@ -108,16 +108,19 @@ form button {
     cursor: pointer;
 }
 
-.show-modal {
+.modal {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    position: fixed;
-    top: 0;
     left: 0;
     background: rgba(0,0,0,0.65);
     height: 100%;
     width: 100%;
+}
+
+.show-modal {
+    position: fixed;
+    top: 0;
     /* filter: blur(5px); */
 }
 
@@ -126,7 +129,7 @@ form button {
     top: -100%;
 }
 
-.show-modal form {
+.modal form {
     background: #fff;
     box-shadow: none;
 }
