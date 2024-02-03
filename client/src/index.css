@@ -9,8 +9,6 @@
     font-family: 'Quicksand';
 }
 
-@media screen and (max-width: 1000px) {
-    * {
-        overflow-x: hidden;
-    }
+body {
+    overflow-x: hidden;
 }

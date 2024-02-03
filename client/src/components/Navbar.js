@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaHome, FaSignInAlt, FaSignOutAlt, FaTasks, FaUser, FaUserPlus } from 'react-icons/fa';
+import { FaBars, FaHome, FaSignInAlt, FaSignOutAlt, FaTasks, FaUser, FaUserPlus } from 'react-icons/fa';
+import logo from '../assets/logo.png';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [toggleMenu, setToggleMenu] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,23 +26,39 @@ const Navbar = () => {
         window.location.reload();
     }
 
+    const handleShowMenu = () => {
+        setToggleMenu(prev => !prev);
+    }
+
+    const handleCloseMenu = () => {
+        setToggleMenu(false);
+    }
+
     return (
         <nav>
-            <label>Task Manager</label>
-            <ul>
-                <li><Link to='/'><FaHome /> Home</Link></li>
-                { isLoggedIn ? 
-                    <>
-                        <li><Link to='/tasks'><FaTasks /> Tasks</Link></li>
-                        <li><Link to='/profile'><FaUser /> Profile</Link></li>
-                        <li onClick={handleLogout}><FaSignOutAlt /> Logout</li>
-                    </> :
-                    <>
-                        <li><Link to='/login'><FaSignInAlt /> Login</Link></li>
-                        <li><Link to='/register'><FaUserPlus /> Register</Link></li>
-                    </>
-                }
-            </ul>
+            <div className="logo">
+                <img src={logo} alt="Ofto Task Manager" />
+                <label>OTM</label>
+            </div>
+            <div>
+                <ul className={toggleMenu ? 'show' : 'hide'}>
+                    <li onClick={handleCloseMenu}><Link to='/'><FaHome /> Home</Link></li>
+                    { isLoggedIn ? 
+                        <>
+                            <li onClick={handleCloseMenu}><Link to='/tasks'><FaTasks /> Tasks</Link></li>
+                            <li onClick={handleCloseMenu}><Link to='/profile'><FaUser /> Profile</Link></li>
+                            <li onClick={handleLogout}><FaSignOutAlt /> Logout</li>
+                        </> :
+                        <>
+                            <li onClick={handleCloseMenu}><Link to='/login'><FaSignInAlt /> Login</Link></li>
+                            <li onClick={handleCloseMenu}><Link to='/register'><FaUserPlus /> Register</Link></li>
+                        </>
+                    }
+                </ul>
+                <div className="menu" onClick={handleShowMenu}>
+                    <FaBars />
+                </div>
+            </div>
         </nav>
     );
 }
