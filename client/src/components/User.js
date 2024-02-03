@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FaPen } from 'react-icons/fa';
+import { FaPen, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import profilePic from '../assets/profile-pic.png';
 
 const User = ({ profile }) => {
+    const [toggleModal, setToggleModal] = useState(false);
+    const [userProfile, setUserProfile] = useState('');
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -36,11 +38,31 @@ const User = ({ profile }) => {
             });
     }
 
+    const handleToggleModal = () => {
+        setToggleModal(!toggleModal);
+    }
+
+    const handleCloseModal = () => {
+        setToggleModal(false);
+    }
+
+    const handleUploadPic = async e => {
+        e.preventDefault();
+
+        const res = await axios.post('https://task-management-server-rho-ten.vercel.app/api/profile/upload', { userProfile },
+            {
+                headers: {
+                    Authorization: token
+                }
+            });
+        console.log(res);
+    }
+
     return (
         <div className='profile'>
             <div className="profile-pic">
                 <img src={profilePic} alt="User Profile" />
-                <div className="pic-edit">
+                <div className="pic-edit" onClick={handleToggleModal}>
                     <FaPen />
                 </div>
             </div>
@@ -53,6 +75,15 @@ const User = ({ profile }) => {
                     <Link to={`edit-profile/${profile.id}`} className="action">Edit profile</Link>
                     <div className="action" onClick={() => handleDeleteProfile(profile.id)}>Delete profile</div>
                 </div>
+            </div>
+            <div className={toggleModal ? "show-modal" : "hide-modal"}>
+                <div className="closeModal" onClick={handleCloseModal}>
+                    <FaTimes />
+                </div>
+                <form onSubmit={handleUploadPic}>
+                    <input type="file" name="userProfile" id="userProfile" value={userProfile} onChange={e => setUserProfile(e.target.value)} />
+                    <button>Upload</button>
+                </form>
             </div>
         </div>
     );

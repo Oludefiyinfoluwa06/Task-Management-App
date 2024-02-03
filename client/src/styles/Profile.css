@@ -108,6 +108,38 @@ form button {
     cursor: pointer;
 }
 
+.show-modal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.65);
+    height: 100%;
+    width: 100%;
+    /* filter: blur(5px); */
+}
+
+.hide-modal {
+    position: absolute;
+    top: -100%;
+}
+
+.show-modal form {
+    background: #fff;
+    box-shadow: none;
+}
+
+.closeModal {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 750px) {
     .profile {
         flex-wrap: wrap;
