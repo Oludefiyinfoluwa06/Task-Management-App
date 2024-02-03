@@ -56,6 +56,9 @@ nav ul.show {
     padding: 20px;
     border-radius: 10px;
     transition: .5s;
+    background: #fff;
+    z-index: 100;
+    font-size: 20px;
 }
 
 nav ul li {
