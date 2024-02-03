@@ -28,40 +28,28 @@ nav .menu {
     cursor: pointer;
 }
 
-nav ul.hide {
+nav ul {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 15px;
     position: absolute;
-    top: 100px;
-    right: -100%;
+    right: 20px;
     box-shadow: 0 0 10px #ccc;
     padding: 20px;
     border-radius: 10px;
-    transition: .5s;
     background: #fff;
     z-index: 100;
     font-size: 20px;
 }
 
+nav ul.hide {
+    top: -100%;
+}
+
 nav ul.show {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 15px;
-    position: absolute;
     top: 100px;
-    right: 20px;
-    box-shadow: 0 0 10px #ccc;
-    padding: 20px;
-    border-radius: 10px;
-    transition: .5s;
-    background: #fff;
-    z-index: 100;
-    font-size: 20px;
 }
 
 nav ul li {

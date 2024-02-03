@@ -45,6 +45,12 @@ form button {
     width: 600px;
 }
 
+@media screen and (max-width: 420px) {
+    .login img {
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 1000px) {
     .login {
         justify-content: center;
