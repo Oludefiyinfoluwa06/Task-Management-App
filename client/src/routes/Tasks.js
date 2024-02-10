@@ -36,7 +36,6 @@ const Tasks = () => {
                     localStorage.removeItem('user');
                     localStorage.clear();
                     navigate('/login');
-                    window.location.reload();
                 } else {
                     setIsLoading(true);
                 }

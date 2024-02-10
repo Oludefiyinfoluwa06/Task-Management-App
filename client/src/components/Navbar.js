@@ -23,7 +23,6 @@ const Navbar = () => {
         localStorage.clear();
         setIsLoggedIn(false);
         navigate('/login');
-        window.location.reload();
     }
 
     const handleShowMenu = () => {
